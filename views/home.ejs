@@ -17,5 +17,8 @@
         </ul>
     </nav>
     <h1>This is a home page</h1>
+    <% if (username != "") {%>
+        <h2>Hello <%= username  %></h2>
+    <% } %>
 </body>
 </html>
