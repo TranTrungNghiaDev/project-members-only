@@ -19,6 +19,9 @@
     <h1>This is a home page</h1>
     <% if (username != "") {%>
         <h2>Hello <%= username  %></h2>
+        <form action="/auth/logout" method="get">
+            <button>Logout</button>
+        </form>
     <% } %>
 </body>
 </html>

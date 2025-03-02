@@ -8,13 +8,22 @@
 <body>
     <h1>This is login page</h1>
     <form action="/auth/login" method="post">
+        <% if (errors && errors.length > 0) { %>
+            <ul>
+                <% errors.forEach(error => { %>
+                    <li>
+                        <%= error.msg %>
+                    </li>
+               <% }) %>
+            </ul>
+        <% } %>
         <label for="username">Username: </label>
         <input type="text" name="username" placeholder="Type your username here..." required>
 
         <label for="password">Password: </label>
         <input type="password" name="password" placeholder="Type your password here..." required>
 
-        <button type="submit">Register</button>
+        <button type="submit">Login</button>
         <button type="reset">Reset</button>
     </form>
 </body>
