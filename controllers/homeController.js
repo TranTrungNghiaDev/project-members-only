@@ -1,10 +1,6 @@
 exports.getHome = (req, res) => {
-    let username;
     if(req.isAuthenticated()) {
-        username = req.user.username;
+       return res.render("home", {username: req.user.username});
     }
-    else {
-        username = "";
-    }
-    res.render("home", {username});
+    res.render("home", {username: ""});
 }

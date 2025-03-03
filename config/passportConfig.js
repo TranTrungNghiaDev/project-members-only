@@ -1,6 +1,7 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const pool = require("./pool");
+const bcryptjs = require("bcryptjs");
 
 // Add passport strategy
 passport.use(new LocalStrategy(async (username, password, done) => {
@@ -13,12 +14,12 @@ passport.use(new LocalStrategy(async (username, password, done) => {
         const user = result.rows[0];
 
         // Check password match or not
-        if(password !== user.password) {
+        const isMatch = await bcryptjs.compare(password, user.password);
+        if(!isMatch) {
             return done(null, false, {message: "Password is not correct"});
         }
 
         done(null, user);
-        
 
     } catch (error) {
         done(error);

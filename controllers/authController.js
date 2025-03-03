@@ -1,6 +1,7 @@
 const { validationResult } = require("express-validator");
 const pool = require("../config/pool");
 const passport = require("passport");
+const bcryptjs = require("bcryptjs");
 
 exports.getRegister = (req, res) => {
     res.render("register", {
@@ -18,7 +19,8 @@ exports.postRegister = async (req, res) => {
 
     try {
         const { username, password, firstName, lastName } = req.body;
-        await pool.query("INSERT INTO users (username, password, firstname, lastname) VALUES($1,$2,$3,$4)", [username, password, firstName, lastName]);
+        const hashedPassword = await bcryptjs.hash(password, 10);
+        await pool.query("INSERT INTO users (username, password, firstname, lastname) VALUES($1,$2,$3,$4)", [username, hashedPassword, firstName, lastName]);
         res.render("home", { username: req.body.username });
     } catch (error) {
         console.log("Register error: ", error);
@@ -35,17 +37,26 @@ exports.getLogin = (req, res) => {
 
 exports.postLogin = (req, res, next) => {
     passport.authenticate("local", (error, user, info) => {
-        
-    })
+        if(error) {
+           return next(error);
+        }
+        if(!user) {
+            return res.render("login", {errors: [{msg: "Username or Password is not correct"}]});
+        }
+        req.logIn(user, (error) => {
+            if(error) {
+                return next(error);
+            }
+            return res.redirect("/");
+        })
+    })(req, res,next);
 }
 
-exports.getLogout = (req, res) => {
-    req.logout((error) => {
+exports.getLogout = (req, res, next) => {
+    req.logOut((error) => {
         if(error) {
             return next(error);
         }
-        req.session.destroy(() => {
-            res.redirect("/");
-        })
+        res.redirect("/");
     })
 }
