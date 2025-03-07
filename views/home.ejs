@@ -22,6 +22,12 @@
         <form action="/auth/logout" method="get">
             <button>Logout</button>
         </form>
+        <% if (membership_status == "Free User") {%>
+            <a href="/upgradeMembership">
+                Upgrade Membership
+            </a>
+        <% } %>
+        <a href="addNewMessage">Create a new message</a>
     <% } %>
 </body>
 </html>

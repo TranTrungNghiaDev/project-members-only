@@ -21,6 +21,10 @@ const homeRouter = require("./routes/home");
 app.use("/", homeRouter);
 const authRouter = require("./routes/auth");
 app.use("/auth", authRouter);
+const upgradeMembershipRouter = require("./routes/upgradeMembership");
+app.use("/upgradeMembership", upgradeMembershipRouter);
+const messageRouter = require("./routes/message");
+app.use("/addNewMessage", messageRouter);
 
 app.listen(3000, () => {
     console.log("Your app is running on PORT 3000");

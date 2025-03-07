@@ -24,10 +24,23 @@ const validateRegiter = [
     .trim()
     .custom((value, {req}) => {
         if (value !== req.body.password) {
-            throw new Error("Password does not match")
+            throw new Error("Password does not match");
         }
         return true;
     })
 ];
 
-module.exports = {validateRegiter};
+
+const validateMembership = [
+    body("secrectPassword")
+    .trim()
+    .custom((value) => {
+        const secretPassword = 'maiyeuNgan';
+        if (value !== secretPassword) {
+            throw new Error("Secret password is not correct");
+        }
+        return true;
+    })
+];
+
+module.exports = {validateRegiter, validateMembership};

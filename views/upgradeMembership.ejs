@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upgrade Membership</title>
+</head>
+<body>
+    <h1>Upgrade Membership</h1>
+    <h2>Enter secrect password to become Membership of this website</h2>
+    <form action="/upgradeMembership" method="post">
+        <label for="secrectPassword">Secrect password: </label>
+        <input name="secrectPassword" type="password" placeholder="Enter secrect password here ...">
+        <button type="submit">Upgrade membership</button>
+    </form>
+    <% if (errors && errors.length > 0) { %>
+        <% errors.forEach(error => { %>
+        <li>
+            <%= error.msg  %>
+        </li>
+        <% }) %>
+    <% } %>
+</body>
+</html>
