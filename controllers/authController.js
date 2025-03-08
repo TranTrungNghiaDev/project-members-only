@@ -4,12 +4,20 @@ const passport = require("passport");
 const bcryptjs = require("bcryptjs");
 
 exports.getRegister = (req, res) => {
+    if(req.isAuthenticated()) {
+        req.logOut((error) => {
+            if(error) {
+                return next(error);
+            }
+        })
+    }
+
     res.render("register", {
         errors: []
     });
 }
 
-exports.postRegister = async (req, res) => {
+exports.postRegister = async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         return res.render("register", {
@@ -20,13 +28,18 @@ exports.postRegister = async (req, res) => {
     try {
         const { username, password, firstName, lastName } = req.body;
         const hashedPassword = await bcryptjs.hash(password, 10);
-        await pool.query("INSERT INTO users (username, password, firstname, lastname) VALUES($1,$2,$3,$4)", [username, hashedPassword, firstName, lastName]);
-        res.render("home", { username: req.body.username });
-    } catch (error) {
-        console.log("Register error: ", error);
-        res.status(500).render("register", {
-            errors: [{ msg: "An error occurred. Please try again" }]
+        const result = await pool.query("INSERT INTO users (username, password, firstname, lastname) VALUES($1,$2,$3,$4) RETURNING *", [username, hashedPassword, firstName, lastName]);
+        const newUser = result.rows[0];
+
+        req.login(newUser, (error) => {
+            if(error) {
+                return next(error);
+            }
+            return res.redirect("/");
         })
+        
+    } catch (error) {
+        return next(error);
     }
 
 }

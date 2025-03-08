@@ -29,5 +29,19 @@
         <% } %>
         <a href="addNewMessage">Create a new message</a>
     <% } %>
+
+    <div class="messages">
+        <h2>Messages</h2>
+        <% if (messages.length > 0) { %>
+            <% messages.forEach(message => { %>
+                <h3>
+                    <%= message.title %>
+                </h3>
+                <p>
+                    <%= message.text %>
+                </p>
+           <% }); %>
+        <% } %>
+    </div>
 </body>
 </html>
