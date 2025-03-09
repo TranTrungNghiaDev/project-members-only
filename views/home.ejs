@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
 </head>
+
 <body>
     <nav>
         <ul>
@@ -18,42 +20,52 @@
     </nav>
     <h1>This is a home page</h1>
     <% if (user) {%>
-        <h2>Hello <%= user.username  %></h2>
+        <h2>Hello <%= user.username %>
+        </h2>
         <form action="/auth/logout" method="get">
             <button>Logout</button>
         </form>
-        <% if (user.membership_status == "Free User") {%>
+        <% if (user.membership_status=="Free User" ) {%>
             <a href="/upgradeAccount/membership">
                 Upgrade Membership
             </a>
-        <% } %>
-        <% if (!user.isadmin) {%>
-            <a href="/upgradeAccount/admin">
-                Upgrade to admin
-            </a>
-        <% } %>
-        <a href="addNewMessage">Create a new message</a>
-    <% } %>
-
-    <div class="messages">
-        <h2>Messages</h2>
-        <% if (messages.length > 0) { %>
-            <% messages.forEach(message => { %>
-                <p>
-                    <%// Display author name depend memship%>
-                    <% if (!user || user.membership_status != "member") { %>
-                        Anonymous
-                    <% } else { %>
-                        <%= message.title %>
+            <% } %>
+                <% if (!user.isadmin) {%>
+                    <a href="/upgradeAccount/admin">
+                        Upgrade to admin
+                    </a>
                     <% } %>
-                    :
-                    <%= message.text %>
-                    <%= message.created_at %>
-                    
-                    <%//   %>
-                </p>
-           <% }); %>
-        <% } %>
-    </div>
+                        <a href="/message/addNewMessage">Create a new message</a>
+                        <% } %>
+
+                            <div class="messages">
+                                <h2>Messages</h2>
+                                <% if (messages.length> 0) { %>
+                                    <% messages.forEach(message=> { %>
+                                        <p>
+                                            <% // Display author name depend memship%>
+                                                <% if (!user || user.membership_status !="member" ) { %>
+                                                    Anonymous
+                                                    <% } else { %>
+                                                        <%= message.title %>
+                                                            <% } %>
+                                                                :
+                                                                <%= message.text %>
+                                                                    <%= message.created_at %>
+
+                                                                        <% if (user && user.isadmin) { %>
+                                                                            <form
+                                                                                action="/message/deleteMessage/<%=message.id%>"
+                                                                                method="post">
+                                                                                <button>Delete Message</button>
+                                                                            </form>
+
+                                                                            <% } %>
+
+                                        </p>
+                                        <% }); %>
+                                            <% } %>
+                            </div>
 </body>
+
 </html>

@@ -20,3 +20,19 @@ exports.postAddNewMessage = async (req, res, next) => {
     }
     
 }
+
+exports.postDeleteMessage = async (req, res, next) => {
+    const {id} = req.params;
+    try {
+        await pool.query
+        (`
+            DELETE FROM messages 
+            WHERE id = $1`,
+            [id]
+        );
+        return res.redirect("/");
+
+    } catch (error) {
+        next(error);
+    }
+}
