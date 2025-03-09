@@ -43,4 +43,16 @@ const validateMembership = [
     })
 ];
 
-module.exports = {validateRegiter, validateMembership};
+const validateAdmin = [
+    body("secrectPassword")
+    .trim()
+    .custom((value) => {
+        const secretPassword = 'dunglamtraitimanhdau';
+        if (value !== secretPassword) {
+            throw new Error("Secret password is not correct");
+        }
+        return true;
+    })
+];
+
+module.exports = {validateRegiter, validateMembership, validateAdmin};

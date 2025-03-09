@@ -1,12 +1,7 @@
 const pool = require("../config/pool");
 
-exports.getAddNewMessage = (req, res) => {
-    const {membership_status} = req.user;
-    if(membership_status === "Free User") {
-       return res.redirect("/upgradeMembership");
-    }
-    
-    return res.render("addNewMessage");
+exports.getAddNewMessage = (req, res) => {    
+    res.render("addNewMessage");
 }
 
 exports.postAddNewMessage = async (req, res, next) => {

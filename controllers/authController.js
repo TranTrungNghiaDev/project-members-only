@@ -4,14 +4,6 @@ const passport = require("passport");
 const bcryptjs = require("bcryptjs");
 
 exports.getRegister = (req, res) => {
-    if(req.isAuthenticated()) {
-        req.logOut((error) => {
-            if(error) {
-                return next(error);
-            }
-        })
-    }
-
     res.render("register", {
         errors: []
     });

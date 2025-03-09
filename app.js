@@ -21,8 +21,8 @@ const homeRouter = require("./routes/home");
 app.use("/", homeRouter);
 const authRouter = require("./routes/auth");
 app.use("/auth", authRouter);
-const upgradeMembershipRouter = require("./routes/upgradeMembership");
-app.use("/upgradeMembership", upgradeMembershipRouter);
+const upgradeAccountRouter = require("./routes/upgradeAccount");
+app.use("/upgradeAccount", upgradeAccountRouter);
 const messageRouter = require("./routes/message");
 app.use("/addNewMessage", messageRouter);
 

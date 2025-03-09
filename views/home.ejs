@@ -17,14 +17,19 @@
         </ul>
     </nav>
     <h1>This is a home page</h1>
-    <% if (username != "") {%>
-        <h2>Hello <%= username  %></h2>
+    <% if (user) {%>
+        <h2>Hello <%= user.username  %></h2>
         <form action="/auth/logout" method="get">
             <button>Logout</button>
         </form>
-        <% if (membership_status == "Free User") {%>
-            <a href="/upgradeMembership">
+        <% if (user.membership_status == "Free User") {%>
+            <a href="/upgradeAccount/membership">
                 Upgrade Membership
+            </a>
+        <% } %>
+        <% if (!user.isadmin) {%>
+            <a href="/upgradeAccount/admin">
+                Upgrade to admin
             </a>
         <% } %>
         <a href="addNewMessage">Create a new message</a>
@@ -34,11 +39,18 @@
         <h2>Messages</h2>
         <% if (messages.length > 0) { %>
             <% messages.forEach(message => { %>
-                <h3>
-                    <%= message.title %>
-                </h3>
                 <p>
+                    <%// Display author name depend memship%>
+                    <% if (!user || user.membership_status != "member") { %>
+                        Anonymous
+                    <% } else { %>
+                        <%= message.title %>
+                    <% } %>
+                    :
                     <%= message.text %>
+                    <%= message.created_at %>
+                    
+                    <%//   %>
                 </p>
            <% }); %>
         <% } %>
