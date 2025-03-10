@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upgrade Membership</title>
-</head>
+    <%- include("partials/head", {title: "Upgrade Membership"})  %>
 <body>
+    <%- include("partials/navbar") %>
     <h1>Upgrade Membership</h1>
     <h2>Enter secrect password to become member of this website</h2>
     <form action="/upgradeAccount/membership" method="post">

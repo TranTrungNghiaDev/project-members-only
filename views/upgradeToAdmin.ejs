@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upgrade To Admin</title>
-</head>
+    <%- include("partials/head", {title: "Upgrade To Admin"})  %>
 <body>
+    <%- include("partials/navbar") %>
     <h1>Upgrade To Admin</h1>
     <h2>Enter secrect password to become admin of this website</h2>
     <form action="/upgradeAccount/admin" method="post">

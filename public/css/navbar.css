@@ -1,0 +1,30 @@
+nav {
+    background-color: #E3F2FD;
+    text-align: center;
+    font-weight: bold;
+    padding: 10px 0;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: black;
+    padding: 10px 15px;
+    transition: color 0.3s, background 0.3s;
+    border-radius: 5px;
+}
+
+nav ul li a {
+    background-color: #90CAF9;
+    color: white;
+}
