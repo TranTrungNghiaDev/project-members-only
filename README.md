@@ -38,11 +38,8 @@
 
 ## ⚙ Technologies Used
 - **Backend:** Node.js, Express.js, Passport.js  
-- **Frontend:** EJS, Bootstrap  
+- **Frontend:** HTML, CSS
 - **Database:** PostgreSQL  
-
-## 🤝 Contributing
-Contributions are welcome! If you would like to contribute, please create a **pull request** or contact me.
 
 ## 📩 Contact
 📧 Email: *trantrungnghiadev1998.com*  
