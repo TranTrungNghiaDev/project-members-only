@@ -9,13 +9,18 @@
         <label for="secrectPassword">Secrect password: </label>
         <input name="secrectPassword" type="password" placeholder="Enter secrect password here ...">
         <button type="submit">Upgrade to admin</button>
+
+        <% if (errors && errors.length > 0) { %>
+            <ul>
+            <% errors.forEach(error => { %>
+            <li>
+                <%= error.msg  %>
+            </li>
+            <% }) %>
+        </ul>
+        <% } %>
+        
     </form>
-    <% if (errors && errors.length > 0) { %>
-        <% errors.forEach(error => { %>
-        <li>
-            <%= error.msg  %>
-        </li>
-        <% }) %>
-    <% } %>
+   
 </body>
 </html>
