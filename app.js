@@ -29,7 +29,8 @@ app.use("/upgradeAccount", upgradeAccountRouter);
 const messageRouter = require("./routes/message");
 app.use("/message", messageRouter);
 
-app.listen(3000, () => {
+const PORT = 3000;
+app.listen( process.env.PORT, () => {
     console.log("Your app is running on PORT 3000");
 } )
 
