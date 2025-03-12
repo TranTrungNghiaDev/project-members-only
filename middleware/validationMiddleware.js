@@ -35,7 +35,7 @@ const validateMembership = [
     body("secrectPassword")
     .trim()
     .custom((value) => {
-        const secretPassword = 'maiyeuNgan';
+        const secretPassword = 'member';
         if (value !== secretPassword) {
             throw new Error("Secret password is not correct");
         }
@@ -47,7 +47,7 @@ const validateAdmin = [
     body("secrectPassword")
     .trim()
     .custom((value) => {
-        const secretPassword = 'dunglamtraitimanhdau';
+        const secretPassword = 'admin';
         if (value !== secretPassword) {
             throw new Error("Secret password is not correct");
         }
